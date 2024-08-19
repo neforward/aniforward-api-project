@@ -1,4 +1,5 @@
 "use client"
+import Header from '@/components/Header';
 import Loading from '@/components/Loading';
 import React, { useEffect, useState } from 'react';
 
@@ -7,6 +8,9 @@ const CharacterDetailsPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const truncateTitle = (title, maxLength = 20) => {
+        return title.length > maxLength ? `${title.substring(0, maxLength)}...` : title;
+    };
     useEffect(() => {
         const fetchCharacterDetails = async () => {
             const path = window.location.pathname;
@@ -71,51 +75,54 @@ const CharacterDetailsPage = () => {
     const largeImageUrl = character.images && character.images.jpg && character.images.jpg.large_image_url;
 
     return (
-        <div className="character-details">
-            <div className="container">
-                <div className="character-box">
-                    {largeImageUrl && <img src={largeImageUrl} alt="" />}
-                    <h2>{character.name}</h2>
-                    <p>{character.about}</p>
+        <>
+            <Header />
+            <div className="character-details">
+                <div className="container">
+                    <div className="character-box">
+                        {largeImageUrl && <img src={largeImageUrl} alt="" />}
+                        <h2>{character.name}</h2>
+                        <p>{character.about}</p>
 
-                    <div className="anime-list">
-                        <h3>Anime Appearances</h3>
-                        <ul>
-                            {character.anime.map((anime, index) => (
-                                <li key={index}>
-                                    <img src={anime.anime.images.jpg.large_image_url} alt="" />
-                                    <p>{anime.anime.title} - Role: {anime.role}</p>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                        <div className="main-anime">
+                            <h3>Animeography</h3>
+                            <div className="character-anime-content">
+                                {character.anime.map((anime, index) => (
+                                    <div className="character-animes" key={index}>
+                                        <img src={anime.anime.images.jpg.large_image_url} alt="" />
+                                        <span>{truncateTitle(anime.anime.title)}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
 
-                    <div className="manga-list">
-                        <h3>Manga Appearances</h3>
-                        <ul>
-                            {character.manga.map((manga, index) => (
-                                <li key={index}>
-                                    <img src={manga.manga.images.jpg.large_image_url} alt="" />
-                                    <p>{manga.manga.title} - Role: {manga.role}</p>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className="main-actors">
-                        <h3>Voice Actors</h3>
-                        <div className="character-voice-actors">
-                            {character.voices.map((voice, index) => (
-                                <div className="voice-actors" key={index}>
-                                    <img src={voice.person.images.jpg.image_url} alt="" />
-                                    <p>{voice.person.name} {voice.language}</p>
-                                </div>
-                            ))}
+                        <div className="main-manga">
+                            <h3>Mangaography</h3>
+                            <div className="character-manga-content">
+                                {character.manga.map((manga, index) => (
+                                    <div className="character-mangas" key={index}>
+                                        <img src={manga.manga.images.jpg.large_image_url} alt="" />
+                                        <span>{manga.manga.title} - Role: {manga.role}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="main-actors">
+                            <h3>Voice Actors</h3>
+                            <div className="character-voice-actors">
+                                {character.voices.map((voice, index) => (
+                                    <div className="voice-actors" key={index}>
+                                        <img src={voice.person.images.jpg.image_url} alt="" />
+                                        <span>{voice.person.name} {voice.language}</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-        </div>
+            
+            </>
     );
 };
 

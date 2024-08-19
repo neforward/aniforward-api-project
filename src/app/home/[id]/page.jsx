@@ -86,7 +86,7 @@ const AnimeDetails = () => {
   };
 
   if (loading) return <Loading />;
-  if (!anime) return <Loading />; // Handle loading state
+  if (!anime) return <Loading />;
 
   const truncatedSynopsis = anime.synopsis && anime.synopsis.length > 150
     ? `${anime.synopsis.slice(0, 150)}...`

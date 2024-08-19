@@ -48,7 +48,7 @@ const Header = () => {
     return (
         <>
             <header className="header">
-                <div className="header-container">
+                <div className="wide-container">
                     <div className="header-content">
                         <Link href='/' passHref>
                             <div className="header-logo">
@@ -57,9 +57,8 @@ const Header = () => {
                         </Link>
                         <nav className="header-nav">
                             <Link href='/home'>Home</Link>
-                            <Link href='/movie'>Movies</Link>
-                            <Link href='/series'>TV Series</Link>
-                            <Link href='/popular'>Most Popular</Link>
+                            <Link href='/manga'>Manga</Link>
+                            <Link href='/fyp'>For You</Link>
                             <Link href='/airing'>Top Airing</Link>
                         </nav>
                         <div className="header-search">

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Loading from '@/components/Loading';
 import useFetchAnime from '@/hooks/useFetchAnime';
 import useFetchTopAnime from "@/hooks/useFetchTopAnime";
+import Footer from "@/components/Footer";
 const Home = () => {
     const [page, setPage] = useState(1);
     const { animeList, isLastPage, loading } = useFetchAnime(page);
@@ -85,6 +86,7 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <aside className="top-animes">
+                                    <h2>Top 10</h2>
                                     {topLoading ? (
                                         <Loading />
                                     ) : (
@@ -123,6 +125,7 @@ const Home = () => {
                     )}
                 </div>
             </div>
+            <Footer />
         </>
     );
 };
